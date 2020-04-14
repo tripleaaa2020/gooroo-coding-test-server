@@ -1,0 +1,11 @@
+{
+    "username": "admin",
+    "password": "newyork148x210",
+    "database": "gooroo_coding_test",
+    "host": "gooroo-test-1.cggx7ufhsuwc.us-east-2.rds.amazonaws.com",
+    "port": 3306,
+    "dialect": "mysql",
+    "dialectOptions": {
+        "ssl":"Amazon RDS"
+    }
+}
