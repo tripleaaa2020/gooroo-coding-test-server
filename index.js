@@ -1,9 +1,16 @@
 require('dotenv').config();
 const express = require('express');
+const fs = require('fs');
+const https = require('https');
 const cors = require('cors');
 const apiConf = require('./configs/apiConf');
 const path = require('path');
 var indexRouter = require('./routes/index');
+
+const privateKey = fs.readFileSync('./certs/server.key', 'utf8');
+const certificate = fs.readFileSync('./certs/server.cert', 'utf8');
+const credentials = {key: privateKey, cert: certificate};
+
 const app = express();
 
 app.use(cors());
@@ -36,6 +43,11 @@ app.get('/', (req, res) => {
     res.send('Welcome to Gooroo!')
 });
 
-app.listen(4000, () => {
-    console.log("Listening on port 4000");
-})
+// app.listen(4000, () => {
+//     console.log("Listening on port 443");
+// });
+
+var httpsServer = https.createServer(credentials, app);
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = '0';
+
+httpsServer.listen(8443);
