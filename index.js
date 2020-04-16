@@ -1,24 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql');
 const apiConf = require('./configs/apiConf');
 const path = require('path');
 var indexRouter = require('./routes/index');
 const app = express();
-
-// const connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'newyork148x210',
-//     database: 'gooroo_coding_test'
-// });
-
-// connection.connect(err => {
-//     if(err) {
-//         return err;
-//     }
-// });
 
 app.use(cors());
 app.use(express.json());
@@ -47,49 +33,8 @@ app.use(function (req, res, next) {
   app.use(apiConf.getApi(), indexRouter);
 
 app.get('/', (req, res) => {
-    console.log("ssss")
     res.send('Welcome to Gooroo!')
 });
-
-// app.put('/books/:book_id/edit', (req,res) => {
-//     const { author, title, publisher } = req.query;
-//     const INSERT_BOOK_QUERY = `INSERT INTO books (author, title, publisher) VALUES('${author}','${title}','${publisher}' )`;
-//     connection.query(INSERT_BOOK_QUERY, (err, results) => {
-//         if (err) {
-//             return res.send(err)
-//         }
-//         else {
-//             return res.send("Successfully added book");
-//         }
-//     });
-// });
-
-// app.post('/books/create', (req,res) => {
-//     const { author, title, publisher } = req.query;
-//     const INSERT_BOOK_QUERY = `INSERT INTO books (author, title, publisher) VALUES('${author}','${title}','${publisher}' )`;
-//     connection.query(INSERT_BOOK_QUERY, (err, results) => {
-//         if (err) {
-//             return res.send(err)
-//         }
-//         else {
-//             return res.send("Successfully added book");
-//         }
-//     });
-// });
-
-// app.get('/books/all', (req,res) => {
-//     const SELECT_ALL_BOOKS_QUERY = 'SELECT * FROM books';
-//     connection.query(SELECT_ALL_BOOKS_QUERY, (err, results) => {
-//         if (err) {
-//             return res.send(err)
-//         }
-//         else {
-//             return res.json({
-//                 data: results
-//             })
-//         }
-//     });
-// });
 
 app.listen(4000, () => {
     console.log("Listening on port 4000");
